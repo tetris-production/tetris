@@ -1,0 +1,50 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: black;
+  }
+
+	body, html {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+}
+
+#replayButton {
+	background-color: #ff1489;
+	border: none;
+  cursor: pointer;
+	outline: none;
+  padding: 10px 20px;
+  appearance: none;
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius:30px;
+}
+
+#pauseButton {
+	background-color: rgb(164, 164, 164);
+	border: none;
+  cursor: pointer;
+	outline: none;
+  padding: 10px 20px;
+  appearance: none;
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius:30px;
+	margin: 10px;
+}
+
+.btn {
+	display: flex;
+	flex-direction: column;
+}
+
+#nextTetroCanvas {
+	background-color: #fff;
+}
