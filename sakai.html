@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>酒井のテトリス</title>
+</head>
+
+<body>
+  <h1>テトリス（酒井作成）</h1>
+  <div class="drawInfo">
+    <div>スコア：</div>
+    <div id="score-count">0</div>
+    <div>消したライン数：</div>
+    <div id="line-count">0</div>
+  </div>
+  <div class="button">
+    <span class="start-button" id="start-button">
+      <button type="button" id="text">START</button>
+    </span>
+    <span class="stop-button" id="stop-button">
+      <button type="button" id="action"> STOP </button>
+    </span>
+  </div>
+
+  <canvas id="next"></canvas>
+  <canvas id="can"></canvas>
+
+  <script src="sakai.js"></script>
+
+</body>
+
+</html>
