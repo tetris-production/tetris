@@ -125,13 +125,12 @@ const TETRO_TYPES = [
 tetro_t = Math.floor(Math.random() * (TETRO_TYPES.length - 1)) + 1;
 tetro = TETRO_TYPES[tetro_t];
 
-secondtetro_t = Math.floor(Math.random() * (TETRO_TYPES.length - 1)) + 1;
-secondtetro = TETRO_TYPES[secondtetro_t];
 
 
 //フィールド本体
 let field = []; //一次元配列
 let secnd_field = [];
+
 /*
 [0,0,0,0.....]としたいが10x15はだるいので初期化処理 init()を作成する
 */
@@ -146,6 +145,9 @@ let result = 0;
 var interval;
 
 var repeatFlg = true;
+
+let lineCount = 0; // lineCount をグローバル変数として定義する
+
 
 
 
@@ -188,9 +190,6 @@ function init() {
             field[y][x] = 0; //150個分の0を入れられる
         }
     }
-    // field[5][8] = 1;
-    // field[14][0] = 1;
-    // field[14][9] = 1;
 }
 
 // setIntervalを動かす関数
@@ -289,25 +288,19 @@ function nextdraw() {
 
     context.clearRect(0, 0, SECOND_SCREEN_W, SECOND_SCREEN_H); //ブロックのクリア これで表示キーボード処理後の乱立を無くせる
 
+    prepareNextTetro();
+
     //TETRO_SIZEは4x4
     for (let y = 0; y < TETRO_SIZE; y++) {
         for (let x = 0; x < TETRO_SIZE; x++) {
-            if (secondtetro[y][x]) //tetro二次元配列を見に行っている。"1"の時ブロックを表示
+            if (secondtetro[y][x]) 
             {
                 secnd_drawBlock(secnd_tetro_x + x, secnd_tetro_y + y, secondtetro_t) //本体 tetro_tは配列0～7のどれかをランダムに
             }
         }
     }
-
-    for (let y = 0; y < SECOND_FIELD_ROW; y++) { //フィールド縦をループ
-        for (let x = 0; x < SECOND_FIELD_COL; x++) { //フィールド横をループ
-            if (secnd_field[y][x]) //tetro二次元配列が"1"の時表示
-            {
-                secnd_drawBlock(x, y, secnd_field[y][x])  //field[y][x]はブロックが存在するかどうかをチェックする。フィールド内のカラーを描画している
-            }
-        }
-    }
 }
+
 
 //下まで行ったら固定
 function fixTetro() {
@@ -319,10 +312,7 @@ function fixTetro() {
             }
         }
     }
-    prepareNextTetro();
 }
-
-let lineCount = 0; // lineCount をグローバル変数として定義する
 
 //ラインが揃ったかチェックして消す
 function checkLine() {
@@ -369,15 +359,6 @@ function drawInfo() {
     document.getElementById('line-count').innerHTML = lineCount;
 }
 
-// 次のテトリスの準備を行う関数
-function prepareNextTetro() {
-    // 次のテトリスの形状と位置をランダムに決定する
-    secondtetro_t = Math.floor(Math.random() * (TETRO_TYPES.length - 1)) + 1;
-    secondtetro = TETRO_TYPES[secondtetro_t];
-    secnd_tetro_x = secnd_START_X;
-    secnd_tetro_y = secnd_START_Y;
-}
-
 //落ちていく処理
 function dropTetro() {
 
@@ -389,17 +370,27 @@ function dropTetro() {
         fixTetro(); //固定
         checkLine();
 
-        tetro_t = Math.floor(Math.random() * (TETRO_TYPES.length - 1)) + 1;
-        tetro = TETRO_TYPES[tetro_t];
+
+        tetro_t = secondtetro_t;
+        tetro = secondtetro;
         tetro_x = START_X;
         tetro_y = START_Y;
+
+        nextdraw();//関数を呼び出す場所に注意！！
 
         if (!cheeckMove(0, 0)) {
             over = true;
         }
     }
     drawAll();
-    nextdraw();
+}
+
+function prepareNextTetro() {
+    // 次のテトリスの形状と位置をランダムに決定する
+    secondtetro_t = Math.floor(Math.random() * (TETRO_TYPES.length - 1)) + 1;
+    secondtetro = TETRO_TYPES[secondtetro_t];
+    secnd_tetro_x = secnd_START_X;
+    secnd_tetro_y = secnd_START_Y;
 }
 
 //あたり判定
