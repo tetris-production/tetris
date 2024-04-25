@@ -1,0 +1,57 @@
+<!-- top.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris Top</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to Tetris</h1>
+      <button
+        class="button"
+        onclick="redirectToDirectory('./tetrisdir/katoTetris/index.html')"
+      >
+        加藤テトリス
+      </button>
+      <button
+        class="button"
+        onclick="redirectToDirectory('./tetrisdir/koga.Tetris/koga.html')"
+      >
+        古賀テトリス
+      </button>
+      <button
+        class="button"
+        onclick="redirectToDirectory('./tetrisdir/okada/okada.html')"
+      >
+        岡田テトリス
+      </button>
+      <button
+        class="button"
+        onclick="redirectToDirectory('./tetrisdir/sakai/sakai.html')"
+      >
+        酒井テトリス
+      </button>
+      <button
+        class="button"
+        onclick="redirectToDirectory('./tetrisdir/sakamoto/sakamoto.html')"
+      >
+        坂本テトリス
+      </button>
+      <button
+        class="button"
+        onclick="redirectToDirectory('./tetrisdir/satou/top.html')"
+      >
+        佐藤テトリス
+      </button>
+    </div>
+    <script>
+      function redirectToDirectory(path) {
+        window.location.href = path;
+      }
+    </script>
+  </body>
+</html>
