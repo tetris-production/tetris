@@ -8,17 +8,66 @@
         body {
             background: #888;
         }
+        .explain {
+            background-color: #fff;
+            padding: 10px 40px;
+            left: 20%;
+            top: 25%;
+        }
+        .explain p {
+            margin: 0;
+        }
         #container {
             margin: 0 auto;
         }
+        .toolWrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 30px;
+        }
+        .tool {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #pauseButton,
+        #restartButton {
+            padding: 20px 50px;
+            font-weight: bold;
+            border-radius: 50px;
+            font-size: 20px;
+        }
+        #score {
+            margin: 0 auto;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #fff;
+            width: 200px;
+        }
     </style>
 </head>
-<body onload="init()">
+<body onload="init()" class="base">
     <div id="container">
         <canvas id="canvas"></canvas>
     </div>
-    <button id="pauseButton">ポーズ</button>
-    <div id="score">得点: 0</div>
+    <div class="toolWrap">
+        <div class="explain">
+            <p>←：左</p>
+            <p>→：右</p>
+            <p>↓：下</p>
+            <p>l:左回転</p>
+            <p>r右回転</p>
+            <p>shift:一気に下まで落ちる</p>
+        </div>
+        <div class="tool">
+            <button id="pauseButton">ポーズ</button>
+            <button id="restartButton">やりなおす</button>
+            <div id="score">得点: 0</div>
+        </div>
+    </div>
     <script src="okada.js"></script>
 </body>
 </html>
