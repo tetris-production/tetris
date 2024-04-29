@@ -2,7 +2,7 @@
 let game_speed = 700;
 
 // フィールドのサイズ
-const field_col = 10 //横
+const field_col = 10; //横
 const field_row = 20 //縦
 // ブロックの大きさ
 const block_size = 40
@@ -11,7 +11,14 @@ const screen_width = block_size * field_col
 const screen_height = block_size * field_row
 // テトロミノのサイズ
 const tetro_size = 4
-
+//スコアを格納する変数
+let score = 0;
+//スコアが増えた際の効果音
+const scoreSound = new Audio("score_sound.mp3");
+//初期ハイスコア
+let highScore = localStorage.getItem("highScore") || 0;
+//ハイスコアが更新された時の効果音
+const highscoreSound = new Audio("highscore_sound.mp3");
 
 let can = document.getElementById("can") //キャンバスの用意
 let con = can.getContext("2d")//コンテキストとは
@@ -230,9 +237,49 @@ function checkLine(){
                     field[ny][nx] = field[ny - 1][nx]
                 }
             }
+               // ラインが消えたらスコアを更新
+               score += 100;
+               // スコア表示を更新
+               updateScoreDisplay();
+               updateHighScore();
         }
     }
 }
+
+// スコア表示を更新する関数
+function updateScoreDisplay() {
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    scoreDisplay.textContent = "Score: " + score;
+    scoreSound.play();
+}
+
+//ゲームオーバーになったらスコア初期化する関数
+function resetScore() {
+    score = 0;
+}
+
+//ハイスコア
+function updateHighScore() {
+    if (score > highScore) {
+        highScore = score;
+        // ローカルストレージにハイスコアを保存
+        localStorage.setItem("highScore", highScore);
+        // ハイスコア表示を更新
+        highScoreDisplay.textContent = "High Score: " + highScore;
+        highscoreSound.play();
+    }
+}
+
+// ローカルストレージからハイスコアを取得して表示する関数
+function loadHighScore() {
+    // ローカルストレージからハイスコアを取得
+    highScore = localStorage.getItem("highScore") || 0;
+    // ハイスコア表示を更新
+    highScoreDisplay.textContent = "High Score: " + highScore; // コメントアウトされているので必要に応じて解除してください
+}
+
+// ゲームの初期化時にハイスコアをロードする
+loadHighScore();
 
 // ブロックの落ちる処理
 function dropTetro(){
@@ -256,19 +303,12 @@ function dropTetro(){
         drawAll()
 }
 
-function pauseTetro(){
-	//return clearInterval(dropTetro, game_speed);
-	// if(checkMove(0,0)){
-	// 	tetro_y;
-	// }
-	// drawAll();
-}
-
 // キーボードが押された時の処理
 document.onkeydown = function(e){
-    if(over){
-        return
+    if(over || isPause){ // ゲームオーバーまたは一時停止中の場合は無視する
+        return;
     }
+   
     // onkeydown keycode 検索
     switch( e.keyCode ){
         case 37://左
@@ -296,12 +336,15 @@ document.onkeydown = function(e){
     drawAll()
 }
 
+const replayButton = document.getElementById("replayButton");
 //リプレイボタン
 document.getElementById("replayButton").addEventListener("click", function() {
 	init();
 	drawAll(); // ゲーム画面を描画
-	over = false; // ゲームオーバーフラグをリセット
-  
+	over = false; // 
+    resetScore();
+    updateScoreDisplay(); 
+
 });
 
 //一時停止ボタン
@@ -312,7 +355,7 @@ document.getElementById("pauseButton").addEventListener("click", function() {
 		isPause = false;
 		move = setInterval(dropTetro, game_speed);
 		console.log(isPause);
-		pauseButton.innerHTML = "PAUSE";
+		pauseButton.innerHTML = "PAUSE ⏸";
 
 	} else {
 		isPause = true;
@@ -321,35 +364,28 @@ document.getElementById("pauseButton").addEventListener("click", function() {
 	}
 });
 
-//次のテトリミノを表示させるキャンバス
-let nextTetroCanvas = document.getElementById("nextTetroCanvas");
-let nextTetroCtx = nextTetroCanvas.getContext("2d");
-nextTetroCanvas.width = 100;
-nextTetroCanvas.height = 100;
+// モーダルボタン
+var modalBtn = document.getElementById("modalButton");
 
-// 次のテトリミノを描画する関数
-function drawNextTetro(){
-	nextTetroCtx.clearRect(0, 0, nextTetroCanvas.width, nextTetroCanvas.height);
+// モーダル
+var modal = document.getElementById("myModal");
 
-	const blockSize = nextTetroCanvas.width / tetro_size;
+// 閉じるボタン
+var closeBtn = document.getElementsByClassName("close")[0];
 
-	for(let y = 0; y < tetro_size; y++){
-			for(let x = 0; x < tetro_size; x++){
-					if(nextTetro[y][x]){
-							const posX = x * blockSize + (nextTetroCanvas.width - tetro_size * blockSize) / 2;
-							const posY = y * blockSize + (nextTetroCanvas.height - tetro_size * blockSize) / 2;
-							nextTetroCtx.fillStyle = tetro_colors[nextTetroType];
-							nextTetroCtx.fillRect(posX, posY, blockSize, blockSize);
-							nextTetroCtx.strokeStyle = "#fff";
-							nextTetroCtx.strokeRect(posX, posY, blockSize, blockSize);
-					}
-			}
-	}
+// モーダルボタンをクリックしたらモーダルを表示
+modalBtn.onclick = function() {
+  modal.style.display = "block";
 }
 
-// ゲームの初期化時に次のテトロミノを生成して描画
-let nextTetroType = Math.floor(Math.random() * (tetro_types.length - 1)) + 1;
-let nextTetro = tetro_types[nextTetroType];
-drawNextTetro();
+// 閉じるボタンをクリックしたらモーダルを非表示
+closeBtn.onclick = function() {
+  modal.style.display = "none";
+}
 
-
+// モーダル外の領域をクリックしたらモーダルを非表示
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}

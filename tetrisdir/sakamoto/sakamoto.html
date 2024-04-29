@@ -10,11 +10,33 @@
 </head>
 <body>
     <div class="btn">
-    <span id="pauseButton">PAUSE</span>
+      <button id="modalButton">ゲーム説明</button>
+      <!-- モーダル -->
+      <div id="myModal" class="modal">
+        <!-- モーダルコンテンツ -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>ルール説明</h2>
+          <p>このゲームは画面上部から降ってくる様々な形状のブロック（テトロミノ）を操作し、横一列にブロックを並べるとラインが消去されます。ラインが消えれば100pt獲得できます。ハイスコアを目指しましょう</p>
+          <h2>操作方法</h2>
+          <p>スペースキー：回転</p>
+          <p>→：右に移動</p>
+          <p>↓：下に移動</p>
+          <p>←：左に移動</p>
+        </div>
+      
+      </div>
+    <span id="pauseButton">PAUSE ⏸</span>
     <span id="replayButton">REPLAY ▶️</span>
 </div>
     <canvas id="can"></canvas>
-    <canvas id="nextTetroCanvas" ></canvas> <!-- 次のテトリミノを表示するための要素 -->
+    <div class="score">
+      <div class="col">
+    <img src="oukan.png" alt="" width="50px" hight="10px">
+    <div id="highScoreDisplay"></div>
+  </div>
+    <div id="scoreDisplay">Score: 0</div>
+  </div>
     
 <script src="sakamoto.js"></script>
 </body>
