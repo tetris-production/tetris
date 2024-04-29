@@ -1,0 +1,27 @@
+.game-button {
+  background-color: #5a131c; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+}
+
+/* マウスがボタンに乗った時のスタイル */
+.game-button:hover {
+  background-color: #45a049;
+}
+
+/* ボタンが押された時のスタイル */
+.game-button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(2px);
+}

@@ -275,7 +275,7 @@ function drawAll() {
         con.font = "40px 'MS ゴシック'";
         let w = con.measureText(s).width;
         let x = SCREEN_W / 2 - w / 2;
-        let y = SCREEN_H / 2 - 20;
+        let y = SCREEN_H / 2 + 20;
         con.strokeText(s, x, y);
         con.fillStyle = "black";
         con.fillText(s, x, y);
