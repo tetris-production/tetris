@@ -1,17 +1,52 @@
+body {
+  width: 800px;
+  margin: auto;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.game-field {
+  display: flex;
+  justify-content: center;
+}
+
+.sub-field {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  display: flex;
+  flex-flow: column;
+}
+
+.next {
+  display: flex;
+  justify-content: center;
+  margin: 0 10px 0 10px;
+}
+
 .game-button {
-  background-color: #5a131c; /* Green */
-      border: none;
-      color: white;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s;
+  width: 150px;
+  background-color: #ff0022;
+  border: none;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+  margin: 10px;
 }
 
 /* マウスがボタンに乗った時のスタイル */
@@ -24,4 +59,56 @@
   background-color: #3e8e41;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transform: translateY(2px);
+}
+
+.drawInfo {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.drawInfo ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drawInfo li {
+  margin-bottom: 5px;
+}
+
+.drawInfo li:first-child {
+  font-weight: bold;
+}
+
+#score-count,
+#line-count {
+  font-weight: bold;
+  color: #333;
+}
+
+.key {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  /* キーリストの幅を適切なサイズに設定 */
+}
+
+.key ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.key li {
+  margin-bottom: 5px;
 }

@@ -10,32 +10,42 @@
 
 <body>
   <h1>テトリス（酒井作成）</h1>
-  <div class="drawInfo">
-    <div>スコア：</div>
-    <div id="score-count">0</div>
-    <div>消したライン数：</div>
-    <div id="line-count">0</div>
+  <div class="game-field">
+    <div class="can">
+      <canvas id="can"></canvas>
+    </div>
+    <div class="sub-field">
+      <div class="next">
+        <canvas id="next"></canvas>
+      </div>
+      <div class="button">
+        <span class="game-button" id="start-button">
+          <a type="button" id="text">START</a>
+        </span>
+        <span class="game-button" id="stop-button">
+          <a type="button" id="action"> STOP </a>
+        </span>
+      </div>
+      <div class="drawInfo">
+        <ul>
+          <li>スコア：</li>
+          <li id="score-count">0</li>
+        </ul>
+        <ul>
+          <li>消したライン数：</li>
+          <li id="line-count">0</li>
+        </ul>
+      </div>
+      <div class="key">
+        <ul>
+          <li>→ : 右に移動</li>
+          <li>← : 左に移動</li>
+          <li>shift : 一番下まで</li>
+          <li>スペース : 回転</li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <div class="button">
-    <span class="game-button" id="start-button">
-      <button type="button" id="text">START</button>
-    </span>
-    <span class="game-button" id="stop-button">
-      <button type="button" id="action"> STOP </button>
-    </span>
-  </div>
-  <div>
-    <ul>
-      <li>→ : 右に移動</li>
-      <li>← : 左に移動</li>
-      <li>shift : 一番下まで</li>
-      <li>スペース : 回転</li>
-      <li>↓: 下に移動</li>
-    </ul>
-  </div>
-
-  <canvas id="next"></canvas>
-  <canvas id="can"></canvas>
 
   <script src="sakai.js"></script>
 
